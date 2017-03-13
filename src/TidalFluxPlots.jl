@@ -1,6 +1,6 @@
 module TidalFluxPlots
 
-using RecipesBase, Plots, TidalDischargeModels
+using RecipesBase, Plots, DischargeData, TidalDischargeModels
 
 @recipe function f(adcp::ADCPData)
     p = adcp.p
@@ -84,7 +84,7 @@ end
 
 @recipe f(cs::CrossSectionData) = (cs.x,cs.z)
 
-@recipe f(Q::DischargeData) = (Q.Q,Q.cp)
+@recipe f(Q::Discharge) = (Q.Q,Q.cp)
 
 
 end # module
