@@ -1,6 +1,5 @@
-using TidalFluxPlots, TidalDischargeModels, Plots
+using TidalDischargeModels, TidalFluxPlots, TidalFluxExampleData, Plots
 using Base.Test
-
 
 creek = Creek{:sweeney}()
 deps = parse_deps(creek)
