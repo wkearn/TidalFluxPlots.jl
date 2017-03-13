@@ -1,4 +1,4 @@
-using TidalDischargeModels, TidalFluxPlots, TidalFluxExampleData, Plots
+using ADCPDataProcessing, TidalFluxPlots, TidalFluxExampleData, Plots
 using Base.Test
 
 creek = Creek{:sweeney}()

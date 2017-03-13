@@ -2,5 +2,6 @@ julia 0.5
 RecipesBase
 Plots
 DischargeData
+ADCPDataProcessing
 TidalDischargeModels
 TidalFluxExampleData

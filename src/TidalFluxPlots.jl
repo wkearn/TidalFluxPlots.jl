@@ -1,6 +1,6 @@
 module TidalFluxPlots
 
-using RecipesBase, Plots, DischargeData, TidalDischargeModels
+using RecipesBase, Plots, DischargeData, ADCPDataProcessing, TidalDischargeModels
 
 @recipe function f(adcp::ADCPData)
     p = adcp.p
