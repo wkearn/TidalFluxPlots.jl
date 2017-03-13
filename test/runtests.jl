@@ -1,5 +1,9 @@
-using TidalFluxPlots
+using TidalFluxPlots, TidalDischargeModels, Plots
 using Base.Test
 
-# write your own tests here
-@test 1 == 2
+
+creek = Creek{:sweeney}()
+deps = parse_deps(creek)
+ad1 = load_data(deps[1])
+
+plot(ad1)
