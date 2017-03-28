@@ -73,7 +73,7 @@ end
     
 @recipe f(dep::Deployment) = load_data(dep)
 
-@recipe function f(cal::CalibrationData)
+@recipe function f(cal::Calibration)
     @series begin
         cal.t,cal.Q
     end
