@@ -75,10 +75,10 @@ end
 
 @recipe function f(cal::Calibration)
     @series begin
-        cal.t,cal.Q
+        from_quantity(cal)
     end
     @series begin
-        cal.dd.ts,cal.dd.Q
+        to_quantity(cal)
     end
 end
 
