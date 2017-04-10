@@ -84,7 +84,6 @@ end
 
 @recipe f(cs::CrossSectionData) = (cs.x,cs.z)
 
-@recipe f(Q::Discharge) = (Q.Q,Q.cp)
-
+@recipe f(q::Quantity) = (q.ts,q.q)
 
 end # module
