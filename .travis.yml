@@ -9,10 +9,10 @@ notifications:
 # uncomment the following lines to override the default test script
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - julia -e 'Pkg.clone("https://github.com/wkearn/DischargeData.jl"); Pkg.checkout("DischargeData","generics")'
+  - julia -e 'Pkg.clone("https://github.com/wkearn/DischargeData.jl");'
   - julia -e 'Pkg.clone("https://github.com/wkearn/PIEMetData.jl");'
-  - julia -e 'Pkg.clone("https://github.com/wkearn/ADCPDataProcessing.jl"); Pkg.checkout("ADCPDataProcessing","generics")'
-  - julia -e 'Pkg.clone("https://github.com/wkearn/TidalDischargeModels.jl"); Pkg.checkout("TidalDischargeModels","generics")'
+  - julia -e 'Pkg.clone("https://github.com/wkearn/ADCPDataProcessing.jl");'
+  - julia -e 'Pkg.clone("https://github.com/wkearn/TidalDischargeModels.jl");'
   - julia -e 'Pkg.clone("https://github.com/wkearn/TidalFluxExampleData.jl");'
   - julia -e 'Pkg.clone(pwd()); Pkg.build("TidalFluxPlots"); Pkg.test("TidalFluxPlots"; coverage=true)'
 after_success:
