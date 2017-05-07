@@ -66,7 +66,7 @@ using RecipesBase, Plots, DischargeData, ADCPDataProcessing, TidalDischargeModel
         @series begin
             seriestype := :path
             subplot := 7
-            t, [a1 a2]
+            t, [log1p(a1)]
         end
     end
 end
