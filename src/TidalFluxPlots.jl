@@ -1,17 +1,22 @@
 module TidalFluxPlots
 
-using RecipesBase, Plots, DischargeData, ADCPDataProcessing, TidalDischargeModels
+using RecipesBase, Plots, DischargeData, ADCPDataProcessing, TidalFluxCalibrations, TidalDischargeModels
 
 @recipe function f(adcp::ADCPData)
     p = adcp.p
     v = adcp.v
-    t = Dates.format(adcp.t,"yyyy-mm-dd HH:MM:SS")
+    t = adcp.t
     temp = adcp.temp
     pitch= adcp.pitch
     roll = adcp.roll
     heading = adcp.heading
     
     bs = bins(adcp.dep.adcp)
+    NB = length(bs)
+    LB = div(NB,3)
+    bsx = 1:LB:40
+    bsl = bs[bsx]
+    
     a1t = isnull(adcp.a1)
     a2t = isnull(adcp.a2)
 
@@ -24,40 +29,48 @@ using RecipesBase, Plots, DischargeData, ADCPDataProcessing, TidalDischargeModel
                        angles
                        analog]
     
-    @series begin
+    @series begin        
         seriestype := :path
         subplot := 1
-        t, p
+        xticks := false
+        p
     end
     
     @series begin
         seriestype := :heatmap
         subplot := 2
-        t,bs,v[:,:,1]
+        xticks := false
+        v[:,:,1]
     end
 
     @series begin
         seriestype := :heatmap
         subplot := 3
-        t,bs,v[:,:,2]
+        xticks := false
+        v[:,:,2]
     end
 
     @series begin
         seriestype := :heatmap
         subplot := 4
-        t,bs,v[:,:,3]
+        xticks := false
+        v[:,:,3]
     end
 
     @series begin
         seriestype := :path
         subplot := 5
-        t,temp
+        xticks := false
+        temp
     end
 
     @series begin
         seriestype := :path
         subplot := 6
-        t,[roll pitch heading]
+        xticks := false
+        ylims := (-180,360)
+        yticks := [-180; 0; 180; 360]
+        [roll pitch heading]
     end
     
     if !a1t && !a2t
