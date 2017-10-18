@@ -11,6 +11,7 @@ script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
   - julia -e 'Pkg.clone("https://github.com/wkearn/DischargeData.jl");'
   - julia -e 'Pkg.clone("https://github.com/wkearn/PIEMetData.jl");'
+  - julia -e 'Pkg.clone("https://github.com/wkearn/TidalFluxCalibrations.jl");'
   - julia -e 'Pkg.clone("https://github.com/wkearn/ADCPDataProcessing.jl");'
   - julia -e 'Pkg.clone("https://github.com/wkearn/TidalDischargeModels.jl");'
   - julia -e 'Pkg.clone("https://github.com/wkearn/TidalFluxExampleData.jl");'
@@ -20,3 +21,5 @@ after_success:
   - julia -e 'cd(Pkg.dir("TidalFluxPlots")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
   # push coverage results to Codecov
   - julia -e 'cd(Pkg.dir("TidalFluxPlots")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
+dist: trusty
+sudo: required
