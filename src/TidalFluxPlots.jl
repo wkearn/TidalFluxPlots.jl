@@ -81,6 +81,12 @@ using RecipesBase, Plots, TidalFluxQuantities, ADCPDataProcessing, TidalFluxCali
             subplot := 7
             t, [log1p(a1)]
         end
+    else
+        @series begin
+            seriestype := :path
+            subplot := 7
+            t, zeros(length(t))
+        end
     end
 end
     
