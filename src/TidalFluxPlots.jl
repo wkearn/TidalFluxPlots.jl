@@ -101,6 +101,31 @@ end
     end
 end
 
+struct CalScatter end
+
+@recipe function f{T,F}(::CalScatter,cal::Calibration{T,F})
+    grid := false
+    leg := false
+    xlabel := T.name.name
+    ylabel := F.name.name
+    
+    f = TidalFluxCalibrations.interpolatecal(cal)
+    t = to_quantity(cal)
+    @series begin
+        seriestype := :scatter
+        quantity(f),quantity(t)
+    end
+end
+
+@recipe function f{T,F}(cm::CalibrationModel{T,F})
+    a,b = extrema(quantity(from_quantity(cm.c)))
+    x = a:b
+    y = predict(cm,x)
+    @series begin
+        x,y
+    end
+end
+
 @recipe f(cs::CrossSectionData) = (cs.x,cs.z)
 
 @recipe f(q::Quantity) = (q.ts,q.q)
