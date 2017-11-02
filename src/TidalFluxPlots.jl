@@ -106,8 +106,8 @@ struct CalScatter end
 @recipe function f{T,F}(::CalScatter,cal::Calibration{T,F})
     grid := false
     leg := false
-    xlabel := T.name.name
-    ylabel := F.name.name
+    xlabel := F.name.name
+    ylabel := T.name.name
     
     f = TidalFluxCalibrations.interpolatecal(cal)
     t = to_quantity(cal)
