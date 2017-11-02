@@ -117,6 +117,22 @@ struct CalScatter end
     end
 end
 
+@recipe function f{T,F}(::CalScatter,cals::Vector{Calibration{T,F}})
+    grid := false
+    leg := false
+    xlabel := F.name.name
+    ylabel := T.name.name
+
+    for cal in cals
+        f = TidalFluxCalibrations.interpolatecal(cal)
+        t = to_quantity(cal)
+        @series begin
+            seriestype := :scatter
+            quantity(f),quantity(t)
+        end
+    end
+end
+
 @recipe function f{T,F}(cm::CalibrationModel{T,F})
     a,b = extrema(quantity(from_quantity(cm.c)))
     x = a:b
