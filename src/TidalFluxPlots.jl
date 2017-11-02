@@ -128,6 +128,13 @@ end
 
 @recipe f(cs::CrossSectionData) = (cs.x,cs.z)
 
-@recipe f(q::Quantity) = (q.ts,q.q)
+@recipe function f{Q<:Quantity}(q::Q)
+    xlabel := "Date"
+    ylabel := Q.name.name
+    
+    @series begin
+        q.ts,q.q
+    end
+end
 
 end # module
