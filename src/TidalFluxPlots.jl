@@ -144,12 +144,12 @@ end
 
 @recipe f(cs::CrossSectionData) = (cs.x,cs.z)
 
-mask(q::Quantity,m::Mask) = quantity(q).*[x?1.0:NaN for x in quantity(m)]
-mask(q::Quantity,m::Void) = quantity(q)
+mask_quantity(q::Quantity,m::Mask) = quantity(q).*[x?1.0:NaN for x in quantity(m)]
+mask_quantity(q::Quantity,m::Void) = quantity(q)
 
-@recipe function f{Q<:Quantity}(q::Q;m=nothing)
+@recipe function f{Q<:Quantity}(q::Q;mask=nothing)
     t = TidalFluxQuantities.times(q)
-    v = mask(q,m)
+    v = mask_quantity(q,mask)
     
     xlabel := "Date"
     ylabel := Q.name.name
