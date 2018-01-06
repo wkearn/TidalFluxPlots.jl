@@ -153,4 +153,22 @@ end
     end
 end
 
+@userplot Fingerprint
+
+@recipe function f(fp::Fingerprint)
+    H,Q = fp.args
+
+    xlabel := "Discharge (m³/s)"
+    ylabel := "Stage (m)"
+
+    grid := false
+    leg := false
+
+    framestyle := :origin
+    
+    quantity(Q),quantity(H)
+end
+
+
+
 end # module
