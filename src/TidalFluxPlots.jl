@@ -101,27 +101,17 @@ end
     end
 end
 
-struct CalScatter end
+@userplot CalScatter
 
-@recipe function f{T,F}(::CalScatter,cal::Calibration{T,F})
+@recipe function f(cs::CalScatter)
+    cals = cs.args[1]
     grid := false
     leg := false
-    xlabel := F.name.name
-    ylabel := T.name.name
-    
-    f = TidalFluxCalibrations.interpolatecal(cal)
-    t = to_quantity(cal)
-    @series begin
-        seriestype := :scatter
-        quantity(f),quantity(t)
-    end
-end
 
-@recipe function f{T,F}(::CalScatter,cals::Vector{Calibration{T,F}})
-    grid := false
-    leg := false
+    #=
     xlabel := F.name.name
     ylabel := T.name.name
+    =#
 
     for cal in cals
         f = TidalFluxCalibrations.interpolatecal(cal)
