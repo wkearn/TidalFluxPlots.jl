@@ -123,12 +123,22 @@ end
     end
 end
 
-@recipe function f{T,F}(cm::CalibrationModel{T,F})
+@recipe function f{T,F}(cm::CalibrationModel{T,F};ribbon=false)
     a,b = extrema(quantity(from_quantity(cm.c)))
     x = a:b
-    y = predict(cm,x)
-    @series begin
-        x,y
+    if ribbon == false
+        y = predict(cm,x)
+        @series begin
+            x,y
+        end
+    elseif typeof(ribbon) <: Interval
+        y,i = predict(cm,x,ribbon)
+        ribbon := i
+        @series begin
+            x,y
+        end
+    else
+        error("$ribbon not supported")
     end
 end
 
