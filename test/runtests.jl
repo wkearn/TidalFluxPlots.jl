@@ -26,4 +26,5 @@ cals = parse_cals(creek)
 cald = load_data(cals[1])
 
 plot(cald)
+calscatter(cald)
 
