@@ -185,9 +185,6 @@ mask_quantity(q::Quantity,m::Void) = quantity(q)
     t = TidalFluxQuantities.times(q)
     v = mask_quantity(q,mask)
     
-    xlabel := "Date"
-    ylabel := Q.name.name
-    
     @series begin
         t,v
     end
