@@ -181,14 +181,9 @@ end
 mask_quantity(q::Quantity,m::Mask) = quantity(q).*[x?1.0:NaN for x in quantity(m)]
 mask_quantity(q::Quantity,m::Void) = quantity(q)
 
-@recipe function f{Q<:Quantity}(q::Q;mask=nothing)
-    t = TidalFluxQuantities.times(q)
-    v = mask_quantity(q,mask)
-    
-    @series begin
-        t,v
-    end
-end
+@recipe function f(q::Q) where {Q<:Quantity} = (TidalFluxQuantities.times(q),quantity(q))
+
+@recipe function f(q::Q,m::Mask) where {Q<:Quantity} = (TidalFluxQuantities.times(q),mask_quantity(q,m))
 
 @userplot Fingerprint
 
