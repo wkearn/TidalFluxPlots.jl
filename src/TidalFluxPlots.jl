@@ -123,22 +123,56 @@ end
     end
 end
 
-@recipe function f{T,F}(cm::CalibrationModel{T,F};ribbon=false)
+@recipe function f(cm::CalibrationModel{T,F};calpoints=false,ribbon=false) where {T,F}
+    
     a,b = extrema(quantity(from_quantity(cm.c)))
-    x = a:b
+    x = linspace(a,b,50)
+    
+    color --> :black
+    fillcolor --> :grey70
+    markerstrokecolor --> :grey70
+
+    leg --> false
+    grid --> false
+
+    xlabel := F.name.name
+    ylabel := T.name.name 
+    
     if ribbon == false
         y = predict(cm,x)
-        @series begin
-            x,y
-        end
     elseif typeof(ribbon) <: Interval
         y,i = predict(cm,x,ribbon)
         ribbon := i
-        @series begin
-            x,y
-        end
+        linealpha := 0.0
     else
         error("$ribbon not supported")
+    end
+
+    @series begin
+        x,y
+    end
+
+    if calpoints
+        cal = cm.c
+        
+        f = TidalFluxCalibrations.interpolatecal(cal)
+        t = to_quantity(cal)
+
+        # Reset ribbon
+        ribbon := nothing
+        
+        @series begin
+            seriestype := :scatter
+            quantity(f),quantity(t)
+        end      
+    end
+
+    # Reset ribbon and linealpha
+    ribbon := nothing
+    linealpha := 1.0
+    
+    @series begin              
+        x,y
     end
 end
 
