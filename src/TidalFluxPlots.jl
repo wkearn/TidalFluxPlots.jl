@@ -135,8 +135,8 @@ end
     leg --> false
     grid --> false
 
-    xlabel := F.name.name
-    ylabel := T.name.name 
+    xlabel --> F.name.name
+    ylabel --> T.name.name 
     
     if ribbon == false
         y = predict(cm,x)
