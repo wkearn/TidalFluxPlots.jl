@@ -135,8 +135,8 @@ end
     leg --> false
     grid --> false
 
-    xlabel --> F.name.name
-    ylabel --> T.name.name 
+#    xlabel --> F.name.name
+#    ylabel --> T.name.name 
     
     if ribbon == false
         y = predict(cm,x)
@@ -189,17 +189,17 @@ mask_quantity(q::Quantity,m::Mask) = quantity(q).*[x?1.0:NaN for x in quantity(m
 @recipe function f(fp::Fingerprint)
     H,Q = fp.args
 
-    xlabel := "Discharge (m³/s)"
-    ylabel := "Stage (m)"
+    xlabel --> "Discharge (m³/s)"
+    ylabel --> "Stage (m)"
 
-    grid := false
-    leg := false
+    grid --> false
+    leg --> false
 
-    framestyle := :origin
+    framestyle --> :origin
     
     quantity(Q),quantity(H)
 end
 
-
+include("creeks.jl")
 
 end # module
